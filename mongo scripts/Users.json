@@ -1,0 +1,25 @@
+[{
+  "_id": {
+    "$oid": "60bda80a89975642b83821a9"
+  },
+  "username": "harathi@gmail.com",
+  "empId": "509",
+  "password": "admin",
+  "role": "Admin"
+},{
+  "_id": {
+    "$oid": "60bdaf1c89975642b83821ac"
+  },
+  "username": "manju@gmail.com",
+  "empId": "511",
+  "password": "manager",
+  "role": "Manager"
+},{
+  "_id": {
+    "$oid": "60bdaf3e89975642b83821ad"
+  },
+  "username": "jahnavi@gmail.com",
+  "empId": "512",
+  "password": "Receptionist",
+  "role": "Receptionist"
+}]

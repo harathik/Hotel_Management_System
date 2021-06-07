@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "60bdafea89975642b83821ae"
+  },
+  "name": "manjusha",
+  "empId": "511",
+  "role": "Manager",
+  "email": "manju@gmail.com",
+  "contactNo": "123456",
+  "Salary": "26000"
+},{
+  "_id": {
+    "$oid": "60bdb04e89975642b83821af"
+  },
+  "name": "jahnavi",
+  "empId": "512",
+  "role": "Receptionist",
+  "email": "jahnavi@gmail.com",
+  "contactNo": "34658",
+  "Salary": "24000"
+}]
