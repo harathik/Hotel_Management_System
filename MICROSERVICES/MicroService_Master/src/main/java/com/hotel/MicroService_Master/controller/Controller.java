@@ -22,7 +22,7 @@ import com.hotel.MicroService_Master.model.InventoryDto;
 import com.hotel.MicroService_Master.model.ReturnResponse;
 import com.hotel.MicroService_Master.service.InventoryService;
 
-@CrossOrigin(exposedHeaders = {HttpHeaders.CONTENT_DISPOSITION})
+//@CrossOrigin(exposedHeaders = {HttpHeaders.CONTENT_DISPOSITION})
 @RestController
 @RequestMapping("/hotel")
 public class Controller {
@@ -40,39 +40,39 @@ public class Controller {
 		
 		
 		@PostMapping(value = "/save/inventory")
-		public ResponseEntity<String> saveInventory(@RequestBody InventoryDto inventoryDto) {
+		public String saveInventory(@RequestBody InventoryDto inventoryDto) {
 			
-			return new ResponseEntity( new ReturnResponse(inventoryServiceImpl.saveInventory(inventoryDto)), HttpStatus.OK);
+			return (inventoryServiceImpl.saveInventory(inventoryDto));
 		}
 	    @PutMapping(value = "/update/inventory")
-	    public ResponseEntity<String> updateInventory(@RequestBody InventoryDto inventoryDto) {
+	    public  ReturnResponse updateInventory(@RequestBody InventoryDto inventoryDto) {
 	        Optional<InventoryDto> existing = Optional.ofNullable(inventoryServiceImpl.findById(inventoryDto.getId()));
 	        if(existing.isPresent()){
 	            String saved = inventoryServiceImpl.saveInventory(inventoryDto);
-	            return new ResponseEntity(new ReturnResponse(saved), HttpStatus.OK);
+	            return new ReturnResponse(saved);
 	        }
-	        return new ResponseEntity( new ReturnResponse("Category not found"), HttpStatus.OK);
+	        return new ReturnResponse("Category not found");
 	    }
 		
 		
 		
 		
 		@GetMapping(value="/getAll/inventory")
-	    public ResponseEntity<List<InventoryDto>> getAllInventory(){
-			return new ResponseEntity(inventoryServiceImpl.getAllInventory(), HttpStatus.OK);
+	    public List<InventoryDto> getAllInventory(){
+			return inventoryServiceImpl.getAllInventory();
 			
 		}
 		
 		@GetMapping(value="/getinventory/byid/{id}")
-	    public ResponseEntity<String> findInventoryById(@PathVariable String id){
-			return new ResponseEntity(inventoryServiceImpl.findById(id), HttpStatus.OK);
+	    public  InventoryDto findInventoryById(@PathVariable String id){
+			return inventoryServiceImpl.findById(id);
 			
 		}
 		
 		@DeleteMapping(value="/deleteinventory/byid/{id}")
-	    public ResponseEntity<String> deleteInventoryById(@PathVariable String id){
+	    public  ReturnResponse deleteInventoryById(@PathVariable String id){
 			String success=inventoryServiceImpl.deleteInventoryById(id);
-			return new ResponseEntity(new ReturnResponse(success), HttpStatus.OK);
+			return new ReturnResponse(success);
 			
 		}
 
