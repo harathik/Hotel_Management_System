@@ -1,4 +1,4 @@
-package com.hotel.MicroService_Master;
+package com.hotel.MicroService_Head;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

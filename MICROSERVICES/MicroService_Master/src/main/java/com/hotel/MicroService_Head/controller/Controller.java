@@ -1,15 +1,10 @@
-package com.hotel.MicroService_Master.controller;
+package com.hotel.MicroService_Head.controller;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,17 +13,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.MicroService_Master.model.InventoryDto;
-import com.hotel.MicroService_Master.model.ReturnResponse;
-import com.hotel.MicroService_Master.service.InventoryService;
+import com.hotel.MicroService_Head.model.InventoryDto;
+import com.hotel.MicroService_Head.model.ReturnResponse;
+import com.hotel.MicroService_Head.model.StaffDto;
+import com.hotel.MicroService_Head.service.InventoryService;
+import com.hotel.MicroService_Head.service.StaffService;
 
-//@CrossOrigin(exposedHeaders = {HttpHeaders.CONTENT_DISPOSITION})
+
 @RestController
 @RequestMapping("/hotel")
 public class Controller {
 	   
 	   @Autowired
 	   InventoryService inventoryServiceImpl;
+	   
+	   @Autowired
+	   StaffService staffServiceImpl;
+	   
 
 	    @GetMapping(value = "/test")
 	    public String testHm() {
@@ -53,10 +54,6 @@ public class Controller {
 	        }
 	        return new ReturnResponse("Category not found");
 	    }
-		
-		
-		
-		
 		@GetMapping(value="/getAll/inventory")
 	    public List<InventoryDto> getAllInventory(){
 			return inventoryServiceImpl.getAllInventory();
@@ -75,7 +72,40 @@ public class Controller {
 			return new ReturnResponse(success);
 			
 		}
-
 		
+		
+				@PostMapping(value = "/save/staff")
+		public  String saveStaff(@RequestBody StaffDto staffDto) {
+			return staffServiceImpl.saveStaff(staffDto);	
+			}
+				
+				
+				
+		@GetMapping(value="/getAll/staff")
+	    public List<StaffDto> getAllStaff(){
+			return staffServiceImpl.getAllStaff();
+		
+		}
+		
+		@GetMapping(value="/getstaff/byid/{id}")
+	    public  StaffDto findStaffById(@PathVariable String id){
+			return staffServiceImpl.findById(id);
+	
+		}		
+	@DeleteMapping(value="/deletestaff/byid/{id}")
+	    public  ReturnResponse deleteStaffById(@PathVariable String id){
+			String success=staffServiceImpl.deleteStaffById(id);
+		return new ReturnResponse(success);
+		}
+	    @PutMapping(value = "/update/staff")
+	    public  ReturnResponse updateStaff(@RequestBody StaffDto staffDto) {
+	        Optional<StaffDto> existing = Optional.ofNullable(staffServiceImpl.findById(staffDto.getId()));
+	        if(existing.isPresent()){
+	            String saved = staffServiceImpl.saveStaff(staffDto);
+	            return new ReturnResponse(saved);
+	        }
+	        return new ReturnResponse("cannot find employee or staff ");
+	    }
+	
 
 }

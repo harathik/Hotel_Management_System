@@ -1,8 +1,9 @@
-package com.hotel.MicroService_Master.service;
+package com.hotel.MicroService_Head.service;
 
 import java.util.List;
 
-import com.hotel.MicroService_Master.model.InventoryDto;
+import com.hotel.MicroService_Head.model.InventoryDto;
+import com.hotel.MicroService_Head.model.StaffDto;
 
 public interface InventoryService {
 	  public String saveInventory(InventoryDto inventoryDto);
@@ -12,5 +13,9 @@ public interface InventoryService {
 		public InventoryDto findById(String id);
 		
 		public String deleteInventoryById(String id);
+		
+		public String updateInventory(InventoryDto inventoryDto);
+		
+	
 
 }

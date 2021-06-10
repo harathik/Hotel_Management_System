@@ -1,4 +1,4 @@
-package com.hotel.MicroService_Master.entity;
+package com.hotel.MicroService_Head.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

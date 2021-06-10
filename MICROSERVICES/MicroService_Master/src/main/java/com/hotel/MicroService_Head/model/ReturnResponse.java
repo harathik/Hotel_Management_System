@@ -1,4 +1,4 @@
-package com.hotel.MicroService_Master.model;
+package com.hotel.MicroService_Head.model;
 
 import java.util.Objects;
 
