@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.MicroService_Head.model.InventoryDto;
 import com.hotel.MicroService_Head.model.ReturnResponse;
+import com.hotel.MicroService_Head.model.RoomDto;
 import com.hotel.MicroService_Head.model.StaffDto;
 import com.hotel.MicroService_Head.service.InventoryService;
+import com.hotel.MicroService_Head.service.RoomService;
 import com.hotel.MicroService_Head.service.StaffService;
 
 
@@ -30,29 +32,32 @@ public class Controller {
 	   @Autowired
 	   StaffService staffServiceImpl;
 	   
+	   @Autowired
+	   RoomService roomServiceImpl;
+	   
 
 	    @GetMapping(value = "/test")
 	    public String testHm() {
 
 
-	        return "microservice master setup!!";
+	        return "microservice head setup!!";
 	    }
 	    
 		
 		
 		@PostMapping(value = "/save/inventory")
-		public String saveInventory(@RequestBody InventoryDto inventoryDto) {
+		public String saveInventory(@RequestBody InventoryDto invDto) {
 			
-			return (inventoryServiceImpl.saveInventory(inventoryDto));
+			return (inventoryServiceImpl.saveInventory(invDto));
 		}
 	    @PutMapping(value = "/update/inventory")
-	    public  ReturnResponse updateInventory(@RequestBody InventoryDto inventoryDto) {
-	        Optional<InventoryDto> existing = Optional.ofNullable(inventoryServiceImpl.findById(inventoryDto.getId()));
+	    public  ReturnResponse updateInventory(@RequestBody InventoryDto invDto) {
+	        Optional<InventoryDto> existing = Optional.ofNullable(inventoryServiceImpl.findById(invDto.getId()));
 	        if(existing.isPresent()){
-	            String saved = inventoryServiceImpl.saveInventory(inventoryDto);
-	            return new ReturnResponse(saved);
+	            String created = inventoryServiceImpl.saveInventory(invDto);
+	            return new ReturnResponse(created);
 	        }
-	        return new ReturnResponse("Category not found");
+	        return new ReturnResponse("Inventory not found");
 	    }
 		@GetMapping(value="/getAll/inventory")
 	    public List<InventoryDto> getAllInventory(){
@@ -97,15 +102,42 @@ public class Controller {
 			String success=staffServiceImpl.deleteStaffById(id);
 		return new ReturnResponse(success);
 		}
-	    @PutMapping(value = "/update/staff")
+	    @PutMapping(value = "/updatestaff")
 	    public  ReturnResponse updateStaff(@RequestBody StaffDto staffDto) {
 	        Optional<StaffDto> existing = Optional.ofNullable(staffServiceImpl.findById(staffDto.getId()));
 	        if(existing.isPresent()){
-	            String saved = staffServiceImpl.saveStaff(staffDto);
-	            return new ReturnResponse(saved);
+	            String created = staffServiceImpl.saveStaff(staffDto);
+	            return new ReturnResponse(created);
 	        }
 	        return new ReturnResponse("cannot find employee or staff ");
 	    }
 	
+	    @PostMapping(value = "/save/room")
+		public String saveRoom(@RequestBody RoomDto roomDto) {
+			
+			return roomServiceImpl.saveRoom(roomDto);
+		}
+	    @PutMapping(value = "/update/room")
+		public ReturnResponse updateRoom(@RequestBody RoomDto roomDto) {
 
+
+			return  new ReturnResponse(roomServiceImpl.updateRoom(roomDto));
+		}
+	    @GetMapping(value="/getAll/rooms")
+	    public List<RoomDto> getAllRooms(){
+			return roomServiceImpl.getAllRooms();
+			
+		}
+	    @GetMapping(value="/getroom/byid/{id}")
+	    public  RoomDto findRoomById(@PathVariable String id){
+			return roomServiceImpl.findById(id);
+			
+		}
+		
+		@DeleteMapping(value="/deleteroom/byid/{id}")
+	    public  ReturnResponse deleteRoomById(@PathVariable String id){
+			String success=roomServiceImpl.deleteRoomById(id);
+			return new ReturnResponse(success);
+			
+		}
 }
