@@ -37,15 +37,16 @@ spring:
               args:
                 name: booking-service
                 fallbackuri: forward:/Booking
-        - id: auth-service
-          uri: lb://AUTH-SERVICE
-          predicates:
-            - Path=/auth/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: auth-service
-                fallbackuri: forward:/authFallback        
+#        - id: security-service
+#          uri: lb://SECURITY-SERVICE
+#          predicates:
+#            - Path=/security/**
+#          filters:
+#            
+#            - name: CircuitBreaker
+#              args:
+#                name: security-service
+#                fallbackuri: forward:/Security        
 
 
 
@@ -67,4 +68,4 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 500000
+            timeoutInMilliseconds: 100000

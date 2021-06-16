@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hotel.MicroService_Head.Dto.CategoryDto;
 import com.hotel.MicroService_Head.Dto.InventoryDto;
 import com.hotel.MicroService_Head.Dto.ReturnResponse;
 import com.hotel.MicroService_Head.Dto.RoomDto;
 import com.hotel.MicroService_Head.Dto.StaffDto;
+import com.hotel.MicroService_Head.Repository.CategoryRepository;
+import com.hotel.MicroService_Head.entityDao.Category;
 import com.hotel.MicroService_Head.service.InventoryService;
 import com.hotel.MicroService_Head.service.RoomService;
 import com.hotel.MicroService_Head.service.StaffService;
@@ -35,15 +40,8 @@ public class Controller {
 	   @Autowired
 	   RoomService roomServiceImpl;
 	   
-//	   @Autowired
-//	   OwnerService ownerservice;
-//	   
-//	   @Autowired
-//	   ManagerService managerservice;
-//	   
-//	   @Autowired
-//	   ReceptionistService receptionistservice;
-	   
+	   @Autowired
+	   CategoryRepository categoryRepository;
 	   
 
 	    @GetMapping(value = "/test")
@@ -151,130 +149,25 @@ public class Controller {
 			
 		}
 		
+		@PostMapping(value = "/save/category")
+		public ResponseEntity<String> saveCategory(@RequestBody Category category) {
+
+			return new ResponseEntity(categoryRepository.save(category), HttpStatus.OK);
+		}
+		@PutMapping(value = "/update/category")
+		public ResponseEntity<String> updateCategory(@RequestBody Category category) {
+			Optional<Category> existing = categoryRepository.findById(category.getId());
+			if(existing.isPresent()){
+				Category saved = categoryRepository.save(category);
+				return new ResponseEntity(new ReturnResponse(saved.getName()), HttpStatus.OK);
+			}
+			return new ResponseEntity( new ReturnResponse("Category not found"), HttpStatus.OK);
+		}
+		@GetMapping(value="/getAll/categories")
+		public ResponseEntity<List<CategoryDto>> getAllCategories(){
+			return new ResponseEntity(categoryRepository.findAll(), HttpStatus.OK);
+
+		}
 		
-		
-//		
-//		@PostMapping(value = "/save/manager")
-//		public String saveManager(@RequestBody ManagerDto managerdto) {
-//			
-//			return (managerservice.saveManager(managerdto));
-//		}
-//	    @PutMapping(value = "/update/manager")
-//	    public  ReturnResponse updateManager(@RequestBody ManagerDto managerdto) {
-//	        Optional<ManagerDto> existing = Optional.ofNullable(managerservice.findById(managerdto.getUsername()));
-//	        if(existing.isPresent()){
-//	            String created = managerservice.saveManager(managerdto);
-//	            return new ReturnResponse(created);
-//	        }
-//	        return new ReturnResponse("manager details  not found");
-//	    }
-//		@GetMapping(value="/getAll/managers")
-//	    public List<ManagerDto> getAllManager(){
-//			return managerservice.getAllManager();
-//			
-//		}
-//		
-//		@GetMapping(value="/getmanager/byid/{username}")
-//	    public  ManagerDto findManagerById(@PathVariable String username){
-//			return managerservice.findById(username);
-//			
-//		}
-//		
-//		@DeleteMapping(value="/deletemanager/byid/{username}")
-//	    public  ReturnResponse deleteManagerById(@PathVariable String username){
-//			String success=managerservice.deleteManagerById(username);
-//			return new ReturnResponse(success);
-//			
-//		}
-//		
-//		
-//		
-//		@PostMapping(value = "/save/owner")
-//		public String saveOwner(@RequestBody OwnerDto ownerdto) {
-//		
-//			return (ownerservice.saveOwner(ownerdto));
-//		}
-//	    @PutMapping(value = "/update/owner")
-//	    public  ReturnResponse updateOwner(@RequestBody OwnerDto ownerdto) {
-//	        Optional<OwnerDto> existing = Optional.ofNullable(ownerservice.findById(ownerdto.getUsername()));
-//	        if(existing.isPresent()){
-//	            String created = ownerservice.saveOwner(ownerdto);
-//	            return new ReturnResponse(created);
-//	        }
-//	        return new ReturnResponse("owner details  not found");
-//	    }
-//		@GetMapping(value="/getAll/Owners")
-//	    public List<OwnerDto> getAllOwner(){
-//			return ownerservice.getAllOwner();
-//			
-//		}
-//		
-//		@GetMapping(value="/getowner/byid/{username}")
-//	    public  OwnerDto findOwnerById(@PathVariable String username){
-//			return ownerservice.findById(username);
-//			
-//		}
-//		
-//		@DeleteMapping(value="/deleteowner/byid/{username}")
-//	    public  ReturnResponse deleteOwnerById(@PathVariable String username){
-//			String success=ownerservice.deleteOwnerById(username);
-//			return new ReturnResponse(success);
-//			
-//		}
-//		
-//		
-//		
-//		
-//		
-//		
-//		@PostMapping(value = "/save/receptionist")
-//		public String saveReceptionist(@RequestBody ReceptionistDto receptionistdto) {
-//			
-//			return (receptionistservice.saveReceptionist(receptionistdto));
-//		}
-//	    @PutMapping(value = "/update/Receptionist")
-//	    public  ReturnResponse updateReceptionist(@RequestBody ReceptionistDto receptionistdto) {
-//	        Optional<ReceptionistDto> existing = Optional.ofNullable(receptionistservice.findById(receptionistdto.getUsername()));
-//	        if(existing.isPresent()){
-//	            String created = receptionistservice.saveReceptionist(receptionistdto);
-//	            return new ReturnResponse(created);
-//	        }
-//	        return new ReturnResponse("Receptionist details  not found");
-//	    }
-//		@GetMapping(value="/getAll/Receptionist")
-//	    public List<ReceptionistDto> getAllReceptionist(){
-//			return receptionistservice.getAllReceptionist();
-//			
-//		}
-//		
-//		@GetMapping(value="/getReceptionist/byid/{username}")
-//	    public  ReceptionistDto findReceptionistById(@PathVariable String username){
-//			return receptionistservice.findById(username);
-//			
-//		}
-//		
-//		@DeleteMapping(value="/deleteReceptionist/byid/{username}")
-//	    public  ReturnResponse deleteReceptionistById(@PathVariable String username){
-//			String success=receptionistservice.deleteReceptionistById(username);
-//			return new ReturnResponse(success);
-//			
-//		}
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
-//		
+
 }
