@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hotel.MicroService_Head.Dao.InventoryRepository;
+import com.hotel.MicroService_Head.Repository.InventoryRepository;
 import com.hotel.MicroService_Head.entity.Inventory;
 import com.hotel.MicroService_Head.entity.Staff;
 import com.hotel.MicroService_Head.model.InventoryDto;

@@ -1,4 +1,4 @@
-package com.hotel.MicroService_Head.Dao;
+package com.hotel.MicroService_Head.Repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
