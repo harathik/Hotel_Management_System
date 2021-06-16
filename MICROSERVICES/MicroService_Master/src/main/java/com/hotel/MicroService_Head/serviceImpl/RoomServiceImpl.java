@@ -8,9 +8,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.hotel.MicroService_Head.Dto.RoomDto;
 import com.hotel.MicroService_Head.Repository.RoomRepository;
-import com.hotel.MicroService_Head.entity.Room;
-import com.hotel.MicroService_Head.model.RoomDto;
+import com.hotel.MicroService_Head.entityDao.Room;
 import com.hotel.MicroService_Head.service.RoomService;
 
 @Service

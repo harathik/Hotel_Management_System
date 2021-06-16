@@ -2,7 +2,7 @@ package com.hotel.MicroService_Head.service;
 
 import java.util.List;
 
-import com.hotel.MicroService_Head.model.StaffDto;
+import com.hotel.MicroService_Head.Dto.StaffDto;
 
 public interface StaffService {
 

@@ -1,29 +1,29 @@
-package com.hotel.MicroService_Head.entity;
+package com.hotel.MicroService_Head.Dto;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 
-@Document(collection = "staff")
-public class Staff {
+public class StaffDto {
 
-	@Id
-	private String id;
+	
+private String id;
 	
     private String name;
 	
 	private String empId;
-
-	private String role;
 	
 	private String email;
 	
 	private String contactNo;
 	
-	private String salary;
+	private String Salary;
+
+	private String role;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dob;
@@ -34,21 +34,20 @@ public class Staff {
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 	
-	public Staff() {}
+	public StaffDto() {}
 
-	public Staff(String id, String name, String empId, String email, String contactNo, String salary, Date dob,
-			Date joinDate, Date endDate, String role) {
+	public StaffDto(String id, String name, String empId, String email, String contactNo, String salary, Date dob,
+			Date joinDate, Date endDate) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.empId = empId;
 		this.email = email;
 		this.contactNo = contactNo;
-		this.salary = salary;
+		Salary = salary;
 		this.dob = dob;
 		this.joinDate = joinDate;
 		this.endDate = endDate;
-		this.role = role;
 	}
 
 	public String getRole() {
@@ -100,11 +99,11 @@ public class Staff {
 	}
 
 	public String getSalary() {
-		return salary;
+		return Salary;
 	}
 
 	public void setSalary(String salary) {
-		salary = salary;
+		Salary = salary;
 	}
 
 	public Date getDob() {
@@ -131,13 +130,13 @@ public class Staff {
 		this.endDate = endDate;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Staff [id=" + id + ", name=" + name + ", empId=" + empId + ", email=" + email + ", contactNo="
-				+ contactNo + ", Salary=" + salary + ", dob=" + dob + ", joinDate=" + joinDate + ", endDate=" + endDate
+				+ contactNo + ", Salary=" + Salary + ", dob=" + dob + ", joinDate=" + joinDate + ", endDate=" + endDate
 				+ "]";
 	}
 
-		
-}
 
+}

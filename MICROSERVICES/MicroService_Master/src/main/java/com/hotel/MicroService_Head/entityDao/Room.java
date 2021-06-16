@@ -1,9 +1,13 @@
-package com.hotel.MicroService_Head.model;
+package com.hotel.MicroService_Head.entityDao;
 
-public class RoomDto {
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "rooms")
+public class Room {
 
-    private String id;
+	@Id
+	private String id;
 	
 	private String roomNo;
 	
@@ -17,9 +21,9 @@ public class RoomDto {
 	
 	private boolean booked;
 	
-	public RoomDto() {}
+	public Room() {}
 
-	public RoomDto(String id, String roomNo, String floor, String category, String capacity, String price, boolean booked) {
+	public Room(String id, String roomNo, String floor, String category, String capacity, String price, boolean booked) {
 		super();
 		this.id = id;
 		this.roomNo = roomNo;
@@ -30,7 +34,7 @@ public class RoomDto {
 		this.booked = booked;
 	}
 
-	public RoomDto(String roomNo, String floor, String category, String capacity, String price, boolean booked) {
+	public Room(String roomNo, String floor, String category, String capacity, String price, boolean booked) {
 		this.roomNo = roomNo;
 		this.floor = floor;
 		this.category = category;
@@ -102,6 +106,5 @@ public class RoomDto {
 		return "Room [id=" + id + ", roomNo=" + roomNo + ", floor=" + floor + ", category=" + category + ", capacity="
 				+ capacity + ", price=" + price + ", booked=" + booked + "]";
 	}
-	
 
 }

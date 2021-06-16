@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.MicroService_Head.model.InventoryDto;
-import com.hotel.MicroService_Head.model.ReturnResponse;
-import com.hotel.MicroService_Head.model.RoomDto;
-import com.hotel.MicroService_Head.model.StaffDto;
+import com.hotel.MicroService_Head.Dto.InventoryDto;
+import com.hotel.MicroService_Head.Dto.ReturnResponse;
+import com.hotel.MicroService_Head.Dto.RoomDto;
+import com.hotel.MicroService_Head.Dto.StaffDto;
 import com.hotel.MicroService_Head.service.InventoryService;
 import com.hotel.MicroService_Head.service.RoomService;
 import com.hotel.MicroService_Head.service.StaffService;

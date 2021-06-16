@@ -1,29 +1,29 @@
-package com.hotel.MicroService_Head.model;
+package com.hotel.MicroService_Head.entityDao;
 
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
 
-public class StaffDto {
+@Document(collection = "staff")
+public class Staff {
 
-	
-private String id;
+	@Id
+	private String id;
 	
     private String name;
 	
 	private String empId;
+
+	private String role;
 	
 	private String email;
 	
 	private String contactNo;
 	
-	private String Salary;
-
-	private String role;
+	private String salary;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dob;
@@ -34,20 +34,21 @@ private String id;
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date endDate;
 	
-	public StaffDto() {}
+	public Staff() {}
 
-	public StaffDto(String id, String name, String empId, String email, String contactNo, String salary, Date dob,
-			Date joinDate, Date endDate) {
+	public Staff(String id, String name, String empId, String email, String contactNo, String salary, Date dob,
+			Date joinDate, Date endDate, String role) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.empId = empId;
 		this.email = email;
 		this.contactNo = contactNo;
-		Salary = salary;
+		this.salary = salary;
 		this.dob = dob;
 		this.joinDate = joinDate;
 		this.endDate = endDate;
+		this.role = role;
 	}
 
 	public String getRole() {
@@ -99,11 +100,11 @@ private String id;
 	}
 
 	public String getSalary() {
-		return Salary;
+		return salary;
 	}
 
 	public void setSalary(String salary) {
-		Salary = salary;
+		salary = salary;
 	}
 
 	public Date getDob() {
@@ -130,13 +131,13 @@ private String id;
 		this.endDate = endDate;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Staff [id=" + id + ", name=" + name + ", empId=" + empId + ", email=" + email + ", contactNo="
-				+ contactNo + ", Salary=" + Salary + ", dob=" + dob + ", joinDate=" + joinDate + ", endDate=" + endDate
+				+ contactNo + ", Salary=" + salary + ", dob=" + dob + ", joinDate=" + joinDate + ", endDate=" + endDate
 				+ "]";
 	}
 
-
+		
 }
+

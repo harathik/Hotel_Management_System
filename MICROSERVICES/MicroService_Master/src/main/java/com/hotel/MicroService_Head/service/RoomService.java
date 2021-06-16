@@ -2,7 +2,7 @@ package com.hotel.MicroService_Head.service;
 
 import java.util.List;
 
-import com.hotel.MicroService_Head.model.RoomDto;
+import com.hotel.MicroService_Head.Dto.RoomDto;
 
 public interface RoomService {
 

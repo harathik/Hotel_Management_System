@@ -1,20 +1,21 @@
+package com.hotel.MicroService_Head.entityDao;
 //package com.hotel.MicroService_Head.entity;
 //
 //import org.springframework.data.annotation.Id;
 //import org.springframework.data.mongodb.core.mapping.Document;
 //
-//@Document(collection = "Owner_Details")
-//public class Owner {
-//
+//@Document(collection = "Receptionist_Details")
+//public class Receptionist {
+//	
 //	@Id
 //	private String username;
 //	
 //	private String password;
 //
-//	public Owner() {
+//	public Receptionist() {
 //	}
 //
-//	public Owner(String username, String password) {
+//	public Receptionist(String username, String password) {
 //		super();
 //		this.username = username;
 //		this.password = password;
@@ -38,7 +39,7 @@
 //
 //	@Override
 //	public String toString() {
-//		return "Owner [Username=" + username + ", password=" + password + "]";
+//		return "Receptionist [username=" + username + ", password=" + password + "]";
 //	}
-//	
+//
 //}

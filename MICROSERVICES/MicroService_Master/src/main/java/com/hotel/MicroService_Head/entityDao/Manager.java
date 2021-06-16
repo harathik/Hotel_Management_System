@@ -1,3 +1,4 @@
+package com.hotel.MicroService_Head.entityDao;
 //package com.hotel.MicroService_Head.entity;
 //
 //import org.springframework.data.annotation.Id;

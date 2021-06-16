@@ -2,7 +2,7 @@ package com.hotel.MicroService_Head.service;
 
 import java.util.List;
 
-import com.hotel.MicroService_Head.model.InventoryDto;
+import com.hotel.MicroService_Head.Dto.InventoryDto;
 
 public interface InventoryService {
 	

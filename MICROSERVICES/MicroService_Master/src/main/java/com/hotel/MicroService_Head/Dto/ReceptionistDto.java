@@ -1,16 +1,17 @@
+package com.hotel.MicroService_Head.Dto;
 //package com.hotel.MicroService_Head.model;
 //
-//public class ManagerDto {
+//public class ReceptionistDto {
 //
 //	private String username;
 //	
 //	private String password;
+//	
 //
-//	public ManagerDto() {
-//		
+//	public ReceptionistDto() {
 //	}
 //
-//	public ManagerDto(String username, String password) {
+//	public ReceptionistDto(String username, String password) {
 //		super();
 //		this.username = username;
 //		this.password = password;
@@ -34,7 +35,9 @@
 //
 //	@Override
 //	public String toString() {
-//		return "ManagerDto [username=" + username + ", password=" + password + "]";
+//		return "ReceptionistDto [username=" + username + ", password=" + password + "]";
 //	}
 //	
 //}
+//
+//

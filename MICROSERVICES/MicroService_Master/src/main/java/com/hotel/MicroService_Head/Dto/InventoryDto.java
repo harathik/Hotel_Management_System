@@ -1,4 +1,4 @@
-package com.hotel.MicroService_Head.model;
+package com.hotel.MicroService_Head.Dto;
 
 public class InventoryDto {
 
