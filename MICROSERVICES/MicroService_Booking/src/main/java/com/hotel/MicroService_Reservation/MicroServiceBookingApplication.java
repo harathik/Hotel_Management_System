@@ -1,6 +1,5 @@
 package com.hotel.MicroService_Reservation;
 
-import java.com.hm.app.HmBookingServiceApplication;
 import java.util.Properties;
 
 import org.springframework.boot.SpringApplication;
@@ -13,7 +12,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 public class MicroServiceBookingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HmBookingServiceApplication.class, args);
+		SpringApplication.run(MicroServiceBookingApplication.class, args);
 	}
 	@Bean
 	public JavaMailSender getJavaMailSender() {

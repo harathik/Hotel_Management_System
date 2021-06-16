@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hm.app.Dao.ReservationsRepository;
-import com.hm.app.entity.Reservations;
-import com.hm.app.model.ReservationsDto;
-import com.hm.app.service.ReservationsService;
+import com.hotel.MicroService_Reservation.Dao.ReservationsRepository;
+import com.hotel.MicroService_Reservation.entity.Reservations;
+import com.hotel.MicroService_Reservation.model.ReservationsDto;
+import com.hotel.MicroService_Reservation.service.ReservationsService;
 
 @Service
 public class ReservationsServiceImpl implements ReservationsService{

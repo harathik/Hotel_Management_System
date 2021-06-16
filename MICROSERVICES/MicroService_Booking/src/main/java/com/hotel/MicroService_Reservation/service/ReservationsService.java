@@ -2,7 +2,7 @@ package com.hotel.MicroService_Reservation.service;
 
 import java.util.List;
 
-import com.hm.app.model.ReservationsDto;
+import com.hotel.MicroService_Reservation.model.ReservationsDto;
 
 public interface ReservationsService {
 

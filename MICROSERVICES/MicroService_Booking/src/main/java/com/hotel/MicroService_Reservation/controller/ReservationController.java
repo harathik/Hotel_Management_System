@@ -1,33 +1,32 @@
 package com.hotel.MicroService_Reservation.controller;
 
-import java.security.Principal;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import javax.websocket.server.PathParam;
-import com.hm.app.model.*;
-import com.hm.app.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import com.hm.app.service.ReservationsService;
-//import com.hm.app.utility.MailUtility;
-import com.hm.app.utility.PDFGenerator;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.hotel.MicroService_Reservation.model.ReservationsDto;
+import com.hotel.MicroService_Reservation.model.ReturnResponse;
+import com.hotel.MicroService_Reservation.service.ReservationsService;
+import com.hotel.MicroService_Reservation.utility.PDFGenerator;
 
 @CrossOrigin(exposedHeaders = {HttpHeaders.CONTENT_DISPOSITION})
 @RestController
 @RequestMapping("/booking")
-public class HmBookingController {
+public class ReservationController {
 
   
 

@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hm.app.model.ReservationsDto;
+import com.hotel.MicroService_Reservation.model.ReservationsDto;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
