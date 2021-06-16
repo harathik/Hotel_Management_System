@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.MicroService_Head.Dto.CategoryDto;
 import com.hotel.MicroService_Head.Dto.InventoryDto;
+import com.hotel.MicroService_Head.Dto.RegisterDto;
 import com.hotel.MicroService_Head.Dto.ReturnResponse;
 import com.hotel.MicroService_Head.Dto.RoomDto;
 import com.hotel.MicroService_Head.Dto.StaffDto;
 import com.hotel.MicroService_Head.Repository.CategoryRepository;
 import com.hotel.MicroService_Head.entityDao.Category;
 import com.hotel.MicroService_Head.service.InventoryService;
+import com.hotel.MicroService_Head.service.RegisterService;
 import com.hotel.MicroService_Head.service.RoomService;
 import com.hotel.MicroService_Head.service.StaffService;
 
@@ -42,6 +43,9 @@ public class Controller {
 	   
 	   @Autowired
 	   CategoryRepository categoryRepository;
+	   
+	   @Autowired
+	   RegisterService registerServiceImpl;
 	   
 
 	    @GetMapping(value = "/test")
@@ -150,24 +154,46 @@ public class Controller {
 		}
 		
 		@PostMapping(value = "/save/category")
-		public ResponseEntity<String> saveCategory(@RequestBody Category category) {
+		public  Category saveCategory(@RequestBody Category category) {
 
-			return new ResponseEntity(categoryRepository.save(category), HttpStatus.OK);
+			return categoryRepository.save(category);
 		}
 		@PutMapping(value = "/update/category")
-		public ResponseEntity<String> updateCategory(@RequestBody Category category) {
+		public  ReturnResponse updateCategory(@RequestBody Category category) {
 			Optional<Category> existing = categoryRepository.findById(category.getId());
 			if(existing.isPresent()){
 				Category saved = categoryRepository.save(category);
-				return new ResponseEntity(new ReturnResponse(saved.getName()), HttpStatus.OK);
+				return new ReturnResponse(saved.getName());
 			}
-			return new ResponseEntity( new ReturnResponse("Category not found"), HttpStatus.OK);
+			return  new ReturnResponse("Category not found");
 		}
 		@GetMapping(value="/getAll/categories")
-		public ResponseEntity<List<CategoryDto>> getAllCategories(){
-			return new ResponseEntity(categoryRepository.findAll(), HttpStatus.OK);
+		public List<Category> getAllCategories(){
+			return categoryRepository.findAll();
 
 		}
+		@PostMapping(value = "/save/register")
+		public  String saveEmployee(@RequestBody RegisterDto registerDto) {
+			
+			return registerServiceImpl.saveEmployee(registerDto);
+		}
+		@GetMapping(value="/getAll/registerd")
+	    public List<RegisterDto> getAllRegistered(){
+			return registerServiceImpl.getAllRegistered();
+			
+		}
 		
+		@GetMapping(value="/getregistered/byid/{id}")
+	    public  RegisterDto findRegisterById(@PathVariable String id){
+			return registerServiceImpl.findById(id);
+			
+		}
+		
+		@DeleteMapping(value="/deleteregistered/byid/{id}")
+	    public  ReturnResponse deleteRegisteredById(@PathVariable String id){
+			String success=registerServiceImpl.deleteRegisterById(id);
+			return new ReturnResponse(success);
+			
 
+}
 }
