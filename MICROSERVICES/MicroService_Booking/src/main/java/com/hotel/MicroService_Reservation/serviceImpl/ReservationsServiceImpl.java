@@ -86,4 +86,10 @@ public class ReservationsServiceImpl implements ReservationsService{
 			return id;
 		}
 
+		@Override
+		public Object testHm() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 }

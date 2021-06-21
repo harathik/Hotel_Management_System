@@ -15,4 +15,6 @@ public interface ReservationsService {
     public ReservationsDto findByRoomNo(String id);
 	
 	public String deleteReservationsById(String id);
+
+	public Object testHm();
 }

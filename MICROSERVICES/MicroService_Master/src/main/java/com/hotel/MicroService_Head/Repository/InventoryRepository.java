@@ -9,4 +9,3 @@ import com.hotel.MicroService_Head.entityDao.Inventory;
 public interface InventoryRepository extends MongoRepository<Inventory, String>{
 
 }
-

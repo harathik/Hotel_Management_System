@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//import com.hm.app.constants.HmConstants;
 import com.hotel.MicroService_Head.Dto.RegisterDto;
 import com.hotel.MicroService_Head.Repository.RegisterRepository;
 import com.hotel.MicroService_Head.entityDao.Register;

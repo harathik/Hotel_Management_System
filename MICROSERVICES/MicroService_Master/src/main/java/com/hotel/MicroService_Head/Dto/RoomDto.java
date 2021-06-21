@@ -2,7 +2,6 @@ package com.hotel.MicroService_Head.Dto;
 
 public class RoomDto {
 
-
     private String id;
 	
 	private String roomNo;
@@ -103,5 +102,4 @@ public class RoomDto {
 				+ capacity + ", price=" + price + ", booked=" + booked + "]";
 	}
 	
-
 }

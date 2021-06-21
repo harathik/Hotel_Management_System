@@ -12,7 +12,7 @@ public class ApiGatewayController {
 
 	@RequestMapping("/Head")
 	public Mono<String> masterServiceFallBack() {
-		return Mono.just(" Service Head taking too long");
+		return Mono.just(" Head taking too long !!");
 	}
 	@RequestMapping("/Booking")
 	public Mono<String> bookingServiceFallBack() {

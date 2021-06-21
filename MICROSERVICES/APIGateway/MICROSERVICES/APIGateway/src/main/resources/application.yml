@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: APIGATEWAY-SERVICE
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+      routes:
+        - id: head-service
+          uri: lb://HEAD-SERVICE
+          predicates:
+            - Path=/hotel/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: head-service
+                fallbackuri: forward:/Head
+        - id: booking-service
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/booking/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: booking-service
+                fallbackuri: forward:/Booking
+#        - id: security-service
+#          uri: lb://SECURITY-SERVICE
+#          predicates:
+#            - Path=/security/**
+#          filters:
+#            
+#            - name: CircuitBreaker
+#              args:
+#                name: security-service
+#                fallbackuri: forward:/Security        
+
+
+
+server:
+  port: 8888
+
+management:
+  endpoint:
+    gateway:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+
+hystrix:
+  command:
+    fallbackcmd:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 100000

@@ -1,53 +1,70 @@
 package com.hotel.Security.controller;
 
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.hotel.Security.dto.CredentialsDto;
-import com.hotel.Security.dto.UserDto;
-import com.hotel.Security.services.UserService;
+import com.hotel.Security.entity.User;
+import com.hotel.Security.payload.request.LoginRequest;
+import com.hotel.Security.payload.request.SignupRequest;
+import com.hotel.Security.payload.response.MessageResponse;
+import com.hotel.Security.repository.UserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
 @CrossOrigin
 @RestController
-@Slf4j
-@RequestMapping("/security")
+@RequestMapping("/auth")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	UserRepository userRepository;
 
-    @PostMapping("/signIn")
-    public ResponseEntity<UserDto> signIn(@RequestBody CredentialsDto credentialsDto) {
-        return ResponseEntity.ok(userService.signIn(credentialsDto));
-    }
+	 @GetMapping(value = "/test/docker")
+	    public String testHm() {
 
-    @PostMapping("/validateToken")
-    public ResponseEntity<UserDto> signIn(@RequestParam String token) {
-        return ResponseEntity.ok(userService.validateToken(token));
-    }
 
-    @GetMapping("/test")
-    public String test(){
-        return "success";
-    }
+	        return "Docker set up done!!";
+	    }
+	
+	@PostMapping("/signin")
+	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-    @PostMapping("/createUser")
-    public ResponseEntity<UserDto> createUser(@RequestBody CredentialsDto credentialsDto){
-        return ResponseEntity.ok(userService.createUser(credentialsDto));
-    }
-    @PutMapping("/updateUser/{email}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable String email ,@RequestBody CredentialsDto credentialsDto){
-        return ResponseEntity.ok(userService.updateUser(email,credentialsDto));
-    }
+		 Optional<User> user = userRepository.findByUsername(loginRequest.getUsername());
+	                
+		
+		return ResponseEntity.ok(user);
+	}
+
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+		if (userRepository.existsByUsername(signUpRequest.getUsername())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Username is already taken!"));
+		}
+
+		if (userRepository.existsByEmpId(signUpRequest.getEmpId())) {
+			return ResponseEntity
+					.badRequest()
+					.body(new MessageResponse("Error: Email is already in use!"));
+		}
+
+		User user = new User(signUpRequest.getUsername(),
+							 signUpRequest.getEmpId(),
+							 signUpRequest.getPassword(),signUpRequest.getRole());
+
+		userRepository.save(user);
+
+		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+	}
 }

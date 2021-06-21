@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "inventory")
 public class Inventory {
-	
+
 	@Id
 	private String id;
 	
@@ -63,4 +63,3 @@ public class Inventory {
 	}
 
 }
-

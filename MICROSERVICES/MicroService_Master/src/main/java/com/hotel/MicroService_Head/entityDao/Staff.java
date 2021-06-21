@@ -23,7 +23,7 @@ public class Staff {
 	
 	private String contactNo;
 	
-	private String salary;
+	private String Salary;
 	
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dob;
@@ -44,7 +44,7 @@ public class Staff {
 		this.empId = empId;
 		this.email = email;
 		this.contactNo = contactNo;
-		this.salary = salary;
+		Salary = salary;
 		this.dob = dob;
 		this.joinDate = joinDate;
 		this.endDate = endDate;
@@ -100,11 +100,11 @@ public class Staff {
 	}
 
 	public String getSalary() {
-		return salary;
+		return Salary;
 	}
 
 	public void setSalary(String salary) {
-		salary = salary;
+		Salary = salary;
 	}
 
 	public Date getDob() {
@@ -134,10 +134,9 @@ public class Staff {
 	@Override
 	public String toString() {
 		return "Staff [id=" + id + ", name=" + name + ", empId=" + empId + ", email=" + email + ", contactNo="
-				+ contactNo + ", Salary=" + salary + ", dob=" + dob + ", joinDate=" + joinDate + ", endDate=" + endDate
+				+ contactNo + ", Salary=" + Salary + ", dob=" + dob + ", joinDate=" + joinDate + ", endDate=" + endDate
 				+ "]";
 	}
 
 		
 }
-

@@ -28,14 +28,14 @@ spring:
               args:
                 name: head-service
                 fallbackuri: forward:/Head
-        - id: booking-service
-          uri: lb://BOOKING-SERVICE
+        - id: registration-service
+          uri: lb://RESERVATION-SERVICE
           predicates:
             - Path=/booking/**
           filters:
             - name: CircuitBreaker
               args:
-                name: booking-service
+                name: registration-service
                 fallbackuri: forward:/Booking
 #        - id: security-service
 #          uri: lb://SECURITY-SERVICE
@@ -68,4 +68,4 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 100000
+            timeoutInMilliseconds: 10000

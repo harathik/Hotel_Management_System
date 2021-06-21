@@ -25,7 +25,7 @@ import com.hotel.MicroService_Reservation.utility.PDFGenerator;
 
 @CrossOrigin(exposedHeaders = {HttpHeaders.CONTENT_DISPOSITION})
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/reservation")
 public class ReservationController {
 
   

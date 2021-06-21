@@ -10,21 +10,21 @@ import org.springframework.stereotype.Service;
 import com.hotel.MicroService_Head.Dto.InventoryDto;
 import com.hotel.MicroService_Head.Repository.InventoryRepository;
 import com.hotel.MicroService_Head.entityDao.Inventory;
-import com.hotel.MicroService_Head.entityDao.Staff;
 import com.hotel.MicroService_Head.service.InventoryService;
 
 @Service
 public class InventoryServiceImpl implements InventoryService {
+
 	@Autowired
 	InventoryRepository inventoryRepository;
 	
-	public String saveInventory(InventoryDto invDto) {
+	public String saveInventory(InventoryDto inventoryDto) {
 		
-		Inventory inventory = new Inventory(invDto.getId(),invDto.getName(), invDto.getQuantity(),invDto.getPrice());
+		Inventory inventory = new Inventory(inventoryDto.getId(),inventoryDto.getName(), inventoryDto.getQuantity(),inventoryDto.getPrice());
 
-		Inventory createInventory = inventoryRepository.save(inventory);
+		Inventory savedInventory = inventoryRepository.save(inventory);
 		
-		return createInventory.getId();
+		return savedInventory.getId();
 	}
 	
 	
@@ -35,8 +35,8 @@ public class InventoryServiceImpl implements InventoryService {
 		List<InventoryDto> result = new ArrayList<InventoryDto>();
 		if(!inventoryList.isEmpty()) {
 			for(Inventory s:inventoryList){
-				InventoryDto invDto = new InventoryDto(s.getId(),s.getName(), s.getQuantity(),s.getPrice());
-				result.add(invDto);
+				InventoryDto inventoryDto = new InventoryDto(s.getId(),s.getName(), s.getQuantity(),s.getPrice());
+				result.add(inventoryDto);
 			}
 		}
 	return result;
@@ -44,39 +44,21 @@ public class InventoryServiceImpl implements InventoryService {
 	
 	public InventoryDto findById(String id) {
 		
-		InventoryDto invDto = null;
+		InventoryDto inventoryDto = null;
 		Optional<Inventory> inventory = inventoryRepository.findById(id);
 		
 		if(inventory.isPresent()) {
 			Inventory s =inventory.get();
-			invDto = new InventoryDto(s.getId(),s.getName(), s.getQuantity(),s.getPrice());
+			inventoryDto = new InventoryDto(s.getId(),s.getName(), s.getQuantity(),s.getPrice());
 		}
 		
-	    return invDto;	
+	    return inventoryDto;	
 	
 	}
 	
 	public String deleteInventoryById(String id) {
 		inventoryRepository.deleteById(id);
 		return id;
-	}
-
-
-	@Override
-	public String updateInventory(InventoryDto invDto) {
-		
-			Optional<Inventory> room = inventoryRepository.findById(invDto.getId());
-			System.out.println("**************UPdating"+invDto.getId());
-			Staff updatedStaff = null;
-			if(room.isPresent()){
-				Inventory inventory = new Inventory(invDto.getId(),invDto.getName(),invDto.getQuantity(),invDto.getPrice());
-
-				inventoryRepository.save(inventory);
-				return inventory.getId();
-			}else{
-				return "Unable to find employee";
-			}
-	
 	}
 
 

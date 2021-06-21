@@ -6,7 +6,6 @@ import com.hotel.MicroService_Head.Dto.StaffDto;
 
 public interface StaffService {
 
-	
 	public String saveStaff(StaffDto staffDto);
 	
 	public List<StaffDto> getAllStaff();
