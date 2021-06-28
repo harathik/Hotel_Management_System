@@ -35,6 +35,12 @@ public class SpringFoxConfig {
 	      .paths(PathSelectors.any())
 	      .build();
 	}
+	
+	
+	
+	
+	
+	
 	private ApiInfo apiInfo() {
 	    return new ApiInfo(
 	      "My REST API",

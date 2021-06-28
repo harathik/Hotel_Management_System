@@ -59,11 +59,11 @@ public class Controller {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 
-	    @GetMapping(value = "/test/docker")
+	    @GetMapping(value = "/test")
 	    public String testHm() {
 
 
-	        return "Master service working properly!!!";
+	        return "Head serice is working ";
 	    }
 	    
 		@PostMapping(value = "/save/staff")

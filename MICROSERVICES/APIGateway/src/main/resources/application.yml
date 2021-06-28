@@ -23,30 +23,17 @@ spring:
           uri: lb://HEAD-SERVICE
           predicates:
             - Path=/hotel/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: head-service
-                fallbackuri: forward:/Head
+          
         - id: registration-service
           uri: lb://RESERVATION-SERVICE
           predicates:
-            - Path=/booking/**
-          filters:
-            - name: CircuitBreaker
-              args:
-                name: registration-service
-                fallbackuri: forward:/Booking
-#        - id: security-service
-#          uri: lb://SECURITY-SERVICE
-#          predicates:
-#            - Path=/security/**
-#          filters:
-#            
-#            - name: CircuitBreaker
-#              args:
-#                name: security-service
-#                fallbackuri: forward:/Security        
+            - Path=/reservation/**
+          
+        - id: security-service
+          uri: lb://SECURITY-SERVICE
+          predicates:
+            - Path=/auth/**
+                  
 
 
 
@@ -62,10 +49,3 @@ management:
       exposure:
         include: hystrix.stream
 
-hystrix:
-  command:
-    fallbackcmd:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 10000
